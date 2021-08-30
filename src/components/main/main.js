@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { changeButtonState } from "../../stateManagement/actions/buttonActionCreator";
 import List from "./list/list";
+import ListForm from "./listForm/listForm";
 import Button from "@material-ui/core/Button";
 import "./main.css";
 
 function Main() {
-  let [isButtonClicked, setIsButtonClicked] = useState(false);
+  let state = useSelector(state => state.isButtonClicked)
+  let dispatch = useDispatch();
+
+  function changeForm() {
+    dispatch(changeButtonState())
+  }
+
   let element;
-  if (!isButtonClicked) {
-    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0" }} onClick={() => console.log(1)}>+ ADD A LIST</Button>
+  
+  if (!state.isButtonClicked) {
+    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0" }} onClick={() => changeForm()}>+ ADD A LIST</Button>
   } else {
-    element = <h1>Hello</h1>
+    element = <ListForm />
   }
 
   return (
