@@ -21,9 +21,43 @@
   ],
   "lists": [
     {
-      "title": "Edo",
-      "cards": [],
+      "title": "ASHOT",
       "id": 1
+    },
+    {
+      "title": "Gagik",
+      "id": 2
+    },
+    {
+      "title": "h",
+      "id": 3
+    }
+  ],
+  "cards": [
+    {
+      "title": "John Smith",
+      "locatedAtList": 1,
+      "id": 1
+    },
+    {
+      "title": "London",
+      "locatedAtList": 2,
+      "id": 2
+    },
+    {
+      "title": "Steven",
+      "locatedAtList": 1,
+      "id": 3
+    },
+    {
+      "title": "Steven Berlin",
+      "locatedAtList": 1,
+      "id": 4
+    },
+    {
+      "title": "tokyo",
+      "locatedAtList": 3,
+      "id": 5
     }
   ]
 }

@@ -1,0 +1,22 @@
+.list-item {
+    background-color: #eee;
+    margin-right: 25px;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 280px;
+    min-width: 280px;
+}
+
+.list-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* 
+.card {
+    padding: 8px;
+    margin: 10px 0 8px 0;
+    background-color: #FFF;
+    color: red;
+    cursor: pointer;
+} */

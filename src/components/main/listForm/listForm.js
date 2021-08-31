@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { changeButtonState } from '../../../stateManagement/actions/buttonActionCreator';
 import { TextField } from '@material-ui/core'
