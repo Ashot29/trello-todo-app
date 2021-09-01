@@ -41,15 +41,13 @@ export default function MenuButton(props) {
               'Content-Type': 'application/json'
             },
           })
-            // .then(() => {
-            //   console.log(1);
-            //   fetch(`${DEFAULT_URL}/cards?locatedAtList=${id}`)
-            //     .then(resp => resp.json())
-            //     .then(data => console.log(data))
-            //   return;
-            // })
             .then(() => {
-              console.log(112121)
+              fetch(`${DEFAULT_URL}/cards?locatedAtList=${id}`)
+                .then(resp => resp.json())
+                .then(data => console.log(data))
+              return;
+            })
+            .then(() => {
               fetchingAllLists(DEFAULT_URL, dispatch)
             })
           handleClose();

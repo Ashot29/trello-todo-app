@@ -20,7 +20,7 @@ function ListForm() {
     }
 
     return (
-        <form className='create-list'>
+        <form className='create-list' onSubmit={() => {dispatch(fetchUsers(inputValue)); setInputValue('')}}>
             <TextField id="outlined-basic" label="Enter list title*" value={inputValue} variant="outlined" onChange={event => setInputValue(event.target.value)} />
             <div className='form-buttons'>
                 <Button variant="contained" style={buttonStyles} color="primary" onClick={() => {dispatch(fetchUsers(inputValue)); setInputValue('')}}>
