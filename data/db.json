@@ -19,7 +19,12 @@
       "email": "ann@codingthesmartway.com"
     }
   ],
-  "lists": [],
+  "lists": [
+    {
+      "title": "h",
+      "id": 1
+    }
+  ],
   "cards": [
     {
       "title": "John Smith",

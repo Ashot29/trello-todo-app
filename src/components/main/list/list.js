@@ -19,7 +19,6 @@ export const fetchingAllLists = (url, dispatch) => {
     fetch(`${url}/lists`)
         .then(resp => resp.json())
         .then(data => {
-            if (!data.length) return;
             dispatch(fetchAllUsers(data));
         })
 }
