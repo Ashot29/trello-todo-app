@@ -21,38 +21,25 @@
   ],
   "lists": [
     {
-      "title": "ASHOT",
+      "title": "h",
       "id": 1
-    },
-    {
-      "title": "Gagik",
-      "id": 2
-    },
-    {
-      "title": "dasdasdas",
-      "id": 4
     }
   ],
   "cards": [
     {
-      "title": "Moscow",
-      "locatedAtList": 2,
-      "id": 6
-    },
-    {
       "title": "John Smith",
-      "locatedAtList": 3,
-      "id": 7
-    },
-    {
-      "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "locatedAtList": 1,
-      "id": 9
+      "id": 1
     },
     {
       "title": "Steven Berlin",
       "locatedAtList": 1,
-      "id": 10
+      "id": 2
+    },
+    {
+      "title": "London",
+      "locatedAtList": 2,
+      "id": 3
     }
   ]
 }

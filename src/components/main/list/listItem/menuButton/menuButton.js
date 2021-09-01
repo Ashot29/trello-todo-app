@@ -41,6 +41,15 @@ export default function MenuButton(props) {
               'Content-Type': 'application/json'
             },
           })
+            // .then(() => {
+            //   console.log(1);
+            //   fetch(`${DEFAULT_URL}/cards?id=${id}`, {
+            //     method: 'DELETE',
+            //     headers: {
+            //       'Content-Type': 'application/json'
+            //     }
+            //   })
+            // })
             .then(() => {
               fetchingAllLists(DEFAULT_URL, dispatch)
             })

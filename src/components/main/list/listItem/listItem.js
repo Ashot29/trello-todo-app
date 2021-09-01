@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const ListItem = (props) => {
     let [isClicked, setIsClicked] = useState(false)
     let { title, id } = props;
-    let cards = useSelector(state => state.fetchData.cards);
+    let localCards = useSelector(state => state.fetchData.cards.filter(item => item.locatedAtList === id));
 
     let element = !isClicked ? 
     <div className='list-title' style={{ fontWeight: 700, fontSize: '20px', cursor: 'pointer' }} onClick={() => setIsClicked(!isClicked)}>{title}</div>:
@@ -17,7 +17,7 @@ const ListItem = (props) => {
         <Input defaultValue={title} inputProps={{ 'aria-label': 'description' }} />
     </form>;
 
-    let localCards = cards.filter(item => item.locatedAtList === id)
+    // let localCards = cards.filter(item => item.locatedAtList === id)
 
     return (
         <div className="list-item">

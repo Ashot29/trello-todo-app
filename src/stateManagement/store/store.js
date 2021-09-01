@@ -4,5 +4,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { rootReducer } from "../reducers/rootReducer";
 
 export let store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+console.log(store.getState())
 
 store.subscribe(() => console.log(store.getState(), 'store has been changed.'))
