@@ -10,7 +10,6 @@ export const fetchingAllCards = (url, dispatch) => {
     fetch(`${url}/cards`)
         .then(resp => resp.json())
         .then(data => {
-            if (!data.length) return;
             dispatch(getAllCards(data));
         })
 }

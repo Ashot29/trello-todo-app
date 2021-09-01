@@ -19,25 +19,6 @@
       "email": "ann@codingthesmartway.com"
     }
   ],
-  "lists": [
-    {
-      "title": "title",
-      "id": 1
-    },
-    {
-      "title": "title 2",
-      "id": 2
-    },
-    {
-      "title": "title 3",
-      "id": 3
-    }
-  ],
-  "cards": [
-    {
-      "title": "John Smith",
-      "locatedAtList": 1,
-      "id": 1
-    }
-  ]
+  "lists": [],
+  "cards": []
 }

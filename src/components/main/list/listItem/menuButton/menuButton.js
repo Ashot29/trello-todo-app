@@ -6,6 +6,32 @@ import Fade from '@material-ui/core/Fade';
 import { DEFAULT_URL } from '../../../../../stateManagement/url';
 import { fetchingAllLists } from '../../list';
 import { useDispatch } from 'react-redux';
+import { fetchingAllCards } from './../../list';
+
+function deleteListWithItsCards(url, id, dispatch) {
+  fetch(`${url}/lists/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(() => {
+      fetch(`${url}/cards?locatedAtList=${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+          fetchingAllLists(url, dispatch);
+          data.forEach(item => {
+            fetch(`${url}/cards/${item.id}`, {
+              method: "DELETE",
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(() => fetchingAllCards(url, dispatch))
+          })
+        })
+    })
+}
 
 export default function MenuButton(props) {
   let { id } = props;
@@ -35,21 +61,7 @@ export default function MenuButton(props) {
         TransitionComponent={Fade}
       >
         <MenuItem onClick={() => {
-          fetch(`${DEFAULT_URL}/lists/${id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          })
-            .then(() => {
-              fetch(`${DEFAULT_URL}/cards?locatedAtList=${id}`)
-                .then(resp => resp.json())
-                .then(data => console.log(data))
-              return;
-            })
-            .then(() => {
-              fetchingAllLists(DEFAULT_URL, dispatch)
-            })
+          deleteListWithItsCards(DEFAULT_URL, id, dispatch)
           handleClose();
         }}>
           Delete This List
