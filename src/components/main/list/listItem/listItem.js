@@ -9,9 +9,8 @@ import { useSelector } from 'react-redux';
 import { DEFAULT_URL } from '../../../../stateManagement/url';
 import { fetchingAllLists } from '../list';
 
-const ListItem = (props) => {
+const ListItem = ({ title, id }) => {
     let [isClicked, setIsClicked] = useState(false);
-    let { title, id } = props;
     let dispatch = useDispatch();
     let [value, setValue] = useState(title)
     let localCards = useSelector(state => state.fetchData.cards.filter(item => item.locatedAtList === id));
@@ -28,8 +27,8 @@ const ListItem = (props) => {
                 title: value
             })
         })
-        .then(() => fetchingAllLists(DEFAULT_URL, dispatch))
-        setIsClicked(!isClicked)
+        .then(() => fetchingAllLists(DEFAULT_URL, dispatch));
+        setIsClicked(!isClicked);
         }}>
         <Input value={value} onChange={(e) => setValue(e.target.value)} inputProps={{ 'aria-label': 'description' }} />
     </form>;

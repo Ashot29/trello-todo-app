@@ -5,11 +5,10 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import './card.css'
-import { getAllCards } from '../../../../../stateManagement/actions/fetchDataActionCreator';
 import { DEFAULT_URL } from './../../../../../stateManagement/url';
 import { useDispatch } from 'react-redux';
 import { fetchingAllCards } from '../../list';
+import './card.css'
 
 const useStyles = makeStyles({
     root: {
@@ -33,8 +32,7 @@ function deletingCardFromList(event, id, url, dispatch) {
         })
 }
 
-export default function MediaCard(props) {
-    let { title, id } = props;
+export default function MediaCard({ title, id }) {
     let dispatch = useDispatch();
     const classes = useStyles();
 

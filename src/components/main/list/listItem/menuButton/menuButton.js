@@ -33,8 +33,7 @@ function deleteListWithItsCards(url, id, dispatch) {
     })
 }
 
-export default function MenuButton(props) {
-  let { id } = props;
+export default function MenuButton({ id }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   let dispatch = useDispatch();

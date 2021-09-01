@@ -21,33 +21,28 @@
   ],
   "lists": [
     {
-      "title": "TITLE ONE",
-      "id": 1
+      "title": "title 2",
+      "id": 2
     },
     {
-      "title": "Gagik",
-      "id": 2
+      "title": "title",
+      "id": 3
     }
   ],
   "cards": [
     {
-      "title": "Moscow",
-      "locatedAtList": 1,
-      "id": 1
-    },
-    {
       "title": "Tokyo",
-      "locatedAtList": 1,
+      "locatedAtList": 2,
       "id": 2
     },
     {
-      "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "locatedAtList": 1,
+      "title": "Jack",
+      "locatedAtList": 3,
       "id": 3
     },
     {
-      "title": "Jack",
-      "locatedAtList": 1,
+      "title": "John Smith",
+      "locatedAtList": 3,
       "id": 4
     }
   ]

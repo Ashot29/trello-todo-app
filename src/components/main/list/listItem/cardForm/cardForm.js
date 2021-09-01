@@ -5,8 +5,7 @@ import './cardForm.css'
 import { addCard } from '../../../../../stateManagement/actions/fetchDataActionCreator';
 import { useDispatch } from 'react-redux';
 
-function CardForm(props) {
-    let { id } = props
+function CardForm({ id }) {
     let [inputValue, setInputValue] = useState('');
     let [isClicked, setIsClicked] = useState(false);
     let dispatch = useDispatch();
