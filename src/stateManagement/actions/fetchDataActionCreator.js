@@ -13,24 +13,6 @@ export const fetchUsersSucccess = (list) => {
     }
 }
 
-// export const addingCards = () => {
-//     fetch(`${DEFAULT_URL}/lists/${id}`)
-//         .then(resp => resp.json())
-//         .then(data => {
-//             data.cards.push(inputValue)
-//             return data
-//         })
-//         .then(data => {
-//             fetch(`${DEFAULT_URL}/lists/${id}`, {
-//                 method: "PUT",
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(data)
-//             })
-//         })
-// }
-
 export const fetchAllUsers = (list) => {
     return {
         type: 'FETCH_ALL_USERS',
@@ -64,7 +46,7 @@ export const addCardsActionCreator = (data) => {
 }
 
 export const addCard = (inputValue, locationListId) => {
-    return (dispatch) => {
+    return dispatch => {
         let data = {
             title: inputValue,
             locatedAtList: locationListId

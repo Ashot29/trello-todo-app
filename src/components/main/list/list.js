@@ -6,26 +6,34 @@ import { fetchAllUsers, getAllCards } from '../../../stateManagement/actions/fet
 import { useSelector } from 'react-redux';
 import './list.css'
 
-function List() {
-    let dispatch = useDispatch();
-    let lists = useSelector(state => state.fetchData.lists);
-
-    useEffect(() => {
-        fetch(`${DEFAULT_URL}/lists`)
-        .then(resp => resp.json())
-        .then(data => {
-            if (!data.length) return;
-            dispatch(fetchAllUsers(data));
-        })
-    }, [])
-
-    useEffect(() => {
-        fetch(`${DEFAULT_URL}/cards`)
+export const fetchingAllCards = (url, dispatch) => {
+    fetch(`${url}/cards`)
         .then(resp => resp.json())
         .then(data => {
             if (!data.length) return;
             dispatch(getAllCards(data));
         })
+}
+
+export const fetchingAllLists = (url, dispatch) => {
+    fetch(`${url}/lists`)
+        .then(resp => resp.json())
+        .then(data => {
+            if (!data.length) return;
+            dispatch(fetchAllUsers(data));
+        })
+}
+
+function List() {
+    let dispatch = useDispatch();
+    let lists = useSelector(state => state.fetchData.lists);
+
+    useEffect(() => {
+        fetchingAllLists(DEFAULT_URL, dispatch)
+    }, [])
+
+    useEffect(() => {
+        fetchingAllCards(DEFAULT_URL, dispatch)
     }, [])
 
     return (

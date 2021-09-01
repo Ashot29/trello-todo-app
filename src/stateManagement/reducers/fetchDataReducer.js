@@ -9,7 +9,6 @@ export function fetchData(state = initialState, action) {
             }
         case 'FETCH_USERS_SUCCESS':
             return {
-                ...state,
                 lists: [...state.lists, ...action.payload],
                 isLoading: false,
             }

@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MenuButton from './menuButton/menuButton';
 import './listItem.css'
 import MediaCard from './card/card';
 import CardForm from './cardForm/cardForm';
+import Input from '@material-ui/core/Input';
 import { useSelector } from 'react-redux';
-import { CardContent } from '@material-ui/core';
 
 const ListItem = (props) => {
+    let [isClicked, setIsClicked] = useState(false)
     let { title, id } = props;
     let cards = useSelector(state => state.fetchData.cards);
+
+    let element = !isClicked ? 
+    <div className='list-title' style={{ fontWeight: 700, fontSize: '20px', cursor: 'pointer' }} onClick={() => setIsClicked(!isClicked)}>{title}</div>:
+    <form noValidate autoComplete="off" onSubmit={() => setIsClicked(!isClicked)}>
+        <Input defaultValue={title} inputProps={{ 'aria-label': 'description' }} />
+    </form>;
 
     let localCards = cards.filter(item => item.locatedAtList === id)
 
     return (
         <div className="list-item">
             <div className='list-top'>
-                <div className='list-title' style={{ fontWeight: 700, fontSize: '20px' }}>{title}</div>
+                {element}
                 <div>
-                    <MenuButton />
+                    <MenuButton id={id}/>
                 </div>
             </div>
             <div className='button-and-cards'>
@@ -25,7 +32,7 @@ const ListItem = (props) => {
                     {
                         !!localCards.length &&
                         localCards.map(card => {
-                            return <MediaCard key={card.id} title={card.title}/>
+                            return <MediaCard key={card.id} id={card.id} title={card.title}/>
                         })
                     }
                 </div>
