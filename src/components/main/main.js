@@ -17,7 +17,7 @@ function Main() {
   let element;
   
   if (!state.isButtonClicked) {
-    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0" }} onClick={() => changeForm()}>+ ADD A LIST</Button>
+    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0"}} onClick={() => changeForm()}>+ ADD A LIST</Button>
   } else {
     element = <ListForm />
   }
