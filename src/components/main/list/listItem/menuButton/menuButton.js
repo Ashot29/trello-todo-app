@@ -43,14 +43,13 @@ export default function MenuButton(props) {
           })
             // .then(() => {
             //   console.log(1);
-            //   fetch(`${DEFAULT_URL}/cards?id=${id}`, {
-            //     method: 'DELETE',
-            //     headers: {
-            //       'Content-Type': 'application/json'
-            //     }
-            //   })
+            //   fetch(`${DEFAULT_URL}/cards?locatedAtList=${id}`)
+            //     .then(resp => resp.json())
+            //     .then(data => console.log(data))
+            //   return;
             // })
             .then(() => {
+              console.log(112121)
               fetchingAllLists(DEFAULT_URL, dispatch)
             })
           handleClose();

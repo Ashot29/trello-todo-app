@@ -17,8 +17,6 @@ const ListItem = (props) => {
         <Input defaultValue={title} inputProps={{ 'aria-label': 'description' }} />
     </form>;
 
-    // let localCards = cards.filter(item => item.locatedAtList === id)
-
     return (
         <div className="list-item">
             <div className='list-top'>
