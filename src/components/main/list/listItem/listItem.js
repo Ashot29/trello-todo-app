@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { DEFAULT_URL } from '../../../../stateManagement/url';
 import { fetchingAllLists } from '../list';
 
-const ListItem = ({ title, id }) => {
+const ListItem = (props) => {
+    let { title, id , innerRef, provided} = props
     let [isClicked, setIsClicked] = useState(false);
     let dispatch = useDispatch();
     let [value, setValue] = useState(title)
@@ -34,14 +35,14 @@ const ListItem = ({ title, id }) => {
     </form>;
 
     return (
-        <div className="list-item">
+        <div className="list-item" {...provided.draggableProps} {...provided.dragHandleProps} ref={innerRef}>
             <div className='list-top'>
                 {element}
                 <div>
                     <MenuButton id={id}/>
                 </div>
             </div>
-            <div className='button-and-cards'>
+            <div className='button-and-cards'> 
                 <div className='cards-container'>
                     {
                         !!localCards.length &&
