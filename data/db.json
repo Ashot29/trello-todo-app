@@ -27,6 +27,10 @@
     {
       "title": "title 2",
       "id": 2
+    },
+    {
+      "title": "title 3",
+      "id": 3
     }
   ],
   "cards": [
@@ -49,6 +53,11 @@
       "title": "London",
       "locatedAtList": 2,
       "id": 4
+    },
+    {
+      "title": "Moscow",
+      "locatedAtList": 2,
+      "id": 7
     }
   ]
 }

@@ -50,7 +50,7 @@ function List() {
 
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="list-content">
+            <Droppable droppableId="list-content" direction='horizontal'>
                 {(provided) => (
                     <div className='list-content' {...provided.droppableProps} ref={provided.innerRef}>
                         {
