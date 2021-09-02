@@ -32,22 +32,24 @@ function deletingCardFromList(event, id, url, dispatch) {
         })
 }
 
-export default function MediaCard({ title, id }) {
+export default function MediaCard({ title, id, provided, innerRef }) {
     let dispatch = useDispatch();
     const classes = useStyles();
 
     return (
-        <Card className={classes.root} style={{ marginTop: '15px', marginBottom: '15px' }}
-            onClick={event => deletingCardFromList(event, id, DEFAULT_URL, dispatch)}
-        >
-            <CardContent style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {(title.length <= 13 && title) || title.slice(0, 13) + '...'}
-                </Typography>
-                <IconButton aria-label="delete">
-                    <DeleteIcon />
-                </IconButton>
-            </CardContent>
-        </Card>
+        <div className='card-wrapper' {...provided.draggableProps} {...provided.dragHandleProps} ref={innerRef}>
+            <Card className={classes.root} style={{ marginTop: '15px', marginBottom: '15px' }}
+                onClick={event => deletingCardFromList(event, id, DEFAULT_URL, dispatch)}
+            >
+                <CardContent style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {(title.length <= 13 && title) || title.slice(0, 13) + '...'}
+                    </Typography>
+                    <IconButton aria-label="delete">
+                        <DeleteIcon />
+                    </IconButton>
+                </CardContent>
+            </Card>
+        </div>
     );
 }

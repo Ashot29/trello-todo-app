@@ -21,24 +21,34 @@
   ],
   "lists": [
     {
-      "title": "title 2",
-      "id": 2
+      "title": "title",
+      "id": 1
     },
     {
-      "title": "title 3",
-      "id": 3
+      "title": "title 2",
+      "id": 2
     }
   ],
   "cards": [
     {
-      "title": "Moscow",
-      "locatedAtList": 3,
+      "title": "John Smith",
+      "locatedAtList": 1,
       "id": 1
+    },
+    {
+      "title": "Moscow",
+      "locatedAtList": 1,
+      "id": 2
     },
     {
       "title": "Tokyo",
       "locatedAtList": 2,
-      "id": 2
+      "id": 3
+    },
+    {
+      "title": "London",
+      "locatedAtList": 2,
+      "id": 4
     }
   ]
 }
