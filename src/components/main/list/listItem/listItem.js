@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { DEFAULT_URL } from '../../../../stateManagement/url';
 import { fetchingAllLists } from '../list';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import CardModal from '../../cardModal/cardModal';
 
 const ListItem = ({ title, id, innerRef, provided }) => {
     let [isClicked, setIsClicked] = useState(false);
@@ -23,7 +24,6 @@ const ListItem = ({ title, id, innerRef, provided }) => {
     }, [localCards])
 
     function handleOnDragEnd(result) {
-        console.log(result)
         if (!result.destination) return;
         const items = Array.from(cardsArray);
         const [reorderedItem] = items.splice(result.source.index, 1);
@@ -68,7 +68,10 @@ const ListItem = ({ title, id, innerRef, provided }) => {
                                         return (
                                             <Draggable key={card.id} draggableId={`${card.id}`} index={index}>
                                                 {(provided) => (
-                                                    <MediaCard provided={provided} innerRef={provided.innerRef} id={card.id} title={card.title} />
+                                                    <>
+                                                        <MediaCard provided={provided} innerRef={provided.innerRef} id={card.id} title={card.title} />
+                                                        {/* <CardModal title={card.title} id={card.id} /> */}
+                                                    </>
                                                 )}
                                             </Draggable>
                                         )

@@ -49,7 +49,8 @@ export const addCard = (inputValue, locationListId) => {
     return dispatch => {
         let data = {
             title: inputValue,
-            locatedAtList: locationListId
+            locatedAtList: locationListId,
+            description: ""
         }
         fetch(`${DEFAULT_URL}/cards`, {
             method: "POST",

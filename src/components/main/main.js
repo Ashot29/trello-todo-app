@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { changeButtonState } from "../../stateManagement/actions/buttonActionCreator";
 import List from "./list/list";
 import ListForm from "./listForm/listForm";
@@ -15,19 +15,19 @@ function Main() {
   }
 
   let element;
-  
+
   if (!state.isButtonClicked) {
-    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0"}} onClick={() => changeForm()}>+ ADD A LIST</Button>
+    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0" }} onClick={() => changeForm()}>+ ADD A LIST</Button>
   } else {
     element = <ListForm />
   }
 
   return (
     <div className="main-content">
-      <div className="lists">
-        <List />
-        {element}
-      </div>
+        <div className="lists">
+          <List />
+          {element}
+        </div>
     </div>
   );
 }

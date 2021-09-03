@@ -46,6 +46,8 @@ function List() {
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
         updateListsArray(items);
+
+        // this can be used in changing list position
     }
 
     return (
@@ -53,10 +55,11 @@ function List() {
             <Droppable droppableId="list-content" direction='horizontal'>
                 {(provided) => (
                     <div className='list-content' {...provided.droppableProps} ref={provided.innerRef}>
+                        
                         {
                             listsArray.map((list, index) => {
                                 return (
-                                    <Draggable key={list.id} droppableId="cards" draggableId={`${list.id}`} index={index}>
+                                    <Draggable key={list.id} draggableId={`${list.id}`} index={index}>
                                         {(provided) => (
                                             <ListItem id={list.id} title={list.title} provided={provided} innerRef={provided.innerRef}/>
                                         )}
