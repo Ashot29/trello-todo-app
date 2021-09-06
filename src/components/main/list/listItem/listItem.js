@@ -19,8 +19,7 @@ const ListItem = ({ title, id, innerRef, provided }) => {
     let dispatch = useDispatch();
 
     useEffect(() => {
-        if (cardsArray.length === localCards.length) return; // checking array equality
-        updateCardsArray(localCards)
+        cardRenderingLogic(cardsArray, localCards, updateCardsArray)
     }, [localCards])
 
     function handleOnDragEnd(result) {
@@ -69,8 +68,8 @@ const ListItem = ({ title, id, innerRef, provided }) => {
                                             <Draggable key={card.id} draggableId={`${card.id}`} index={index}>
                                                 {(provided) => (
                                                     <>
-                                                        <MediaCard provided={provided} innerRef={provided.innerRef} id={card.id} title={card.title} />
-                                                        {/* <CardModal title={card.title} id={card.id} /> */}
+                                                        <MediaCard provided={provided} innerRef={provided.innerRef} id={card.id} title={card.title} description={card.description} />
+                                                        <CardModal />
                                                     </>
                                                 )}
                                             </Draggable>
@@ -89,3 +88,41 @@ const ListItem = ({ title, id, innerRef, provided }) => {
 }
 
 export default ListItem;
+
+function cardRenderingLogic(cardsArray, localCards, updateCardsArray) {
+    let arr1 = [...cardsArray];
+    let arr2 = [...localCards];
+    arr1.sort((a, b) => {
+        let fa = a.title.toLowerCase(),
+            fb = b.title.toLowerCase();
+
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    })
+    arr2.sort((a, b) => {
+        let fa = a.title.toLowerCase(),
+            fb = b.title.toLowerCase();
+
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+    })
+    if (arr1.length !== arr2.length) {
+        updateCardsArray(arr2)
+    } else if (true) {
+        for (let i = 0; i < arr1.length; i++) {
+            if (arr1[i].title !== arr2[i].title || arr1[i].description !== arr2[i].description) {
+                updateCardsArray(arr2)
+            }
+        }
+    }
+}

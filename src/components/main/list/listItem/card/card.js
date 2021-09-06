@@ -8,9 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { DEFAULT_URL } from './../../../../../stateManagement/url';
 import { useDispatch } from 'react-redux';
 import { fetchingAllCards } from '../../list';
+import { openModal } from '../../../../../stateManagement/actions/modalActionCreator';
 import './card.css'
-import { changeModalState } from '../../../../../stateManagement/actions/buttonActionCreator';
-import CardModal from '../../../cardModal/cardModal';
 
 const useStyles = makeStyles({
     root: {
@@ -33,15 +32,15 @@ export const deleteCard = (url, id, dispatch) => {
         })
 }
 
-function handlingCardClick(event, id, url, dispatch) {
+function handlingCardClick(event, id, url, dispatch, title, description) {
     if (!event.target.closest('button') || !event.target.closest('button').classList.contains('MuiIconButton-root')) {
-        dispatch(changeModalState())
+        dispatch(openModal(title, id, description))
     } else {
         deleteCard(url, id, dispatch)
     }
 }
 
-export default function MediaCard({ title, id, provided, innerRef }) {
+export default function MediaCard({ title, id, provided, innerRef, description }) {
     let dispatch = useDispatch();
     const classes = useStyles();
 
@@ -49,7 +48,7 @@ export default function MediaCard({ title, id, provided, innerRef }) {
         <>
             <div className='card-wrapper' {...provided.draggableProps} {...provided.dragHandleProps} ref={innerRef}>
                 <Card className={classes.root} style={{ marginTop: '15px', marginBottom: '15px' }}
-                    onClick={event => handlingCardClick(event, id, DEFAULT_URL, dispatch)}
+                    onClick={event => handlingCardClick(event, id, DEFAULT_URL, dispatch, title, description)}
                 >
                     <CardContent style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
                         <Typography gutterBottom variant="h5" component="h2">

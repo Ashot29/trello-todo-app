@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
-import { changeModalState } from '../../../stateManagement/actions/buttonActionCreator';
+import { closeModal } from '../../../stateManagement/actions/modalActionCreator';
 import './cardModal.css'
 import { DEFAULT_URL } from '../../../stateManagement/url';
 import { deleteCard } from '../list/listItem/card/card';
@@ -25,16 +25,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardModal({ title, id }) {
+export default function CardModal() {
+  let state = useSelector(state => state.modalReducer)
+  const { modalTitle: title, modalId: id, modalDescription: description } = state;
   const classes = useStyles();
-  let [desc, setDesc] = useState('');
+  let [desc, setDesc] = useState(description);
   let [titleValue, setTitleValue] = useState(title)
-  let state = useSelector(state => state.isButtonClicked)
   let dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(changeModalState())
+    dispatch(closeModal())
   };
+
+  useEffect(() => {
+    setDesc(description)
+  }, [description])
+
+  useEffect(() => {
+    setTitleValue(title)
+  }, [title])
 
   return (
     <div>
@@ -70,6 +79,7 @@ export default function CardModal({ title, id }) {
                   id="outlined-basic"
                   label="Card Description"
                   style={{ width: '100%' }}
+                  value={desc}
                   variant="outlined"
                   onChange={event => setDesc(event.target.value)}
                 />
@@ -80,12 +90,12 @@ export default function CardModal({ title, id }) {
                   style={{ marginRight: '5px' }}
                   color="primary"
                   onClick={() => {
-                    console.log(1);
                     let data = {
                       title: titleValue,
                       description: desc
                     }
                     updatingCard(id, dispatch, data)
+                    dispatch(closeModal())
                   }}
                 >
                   SAVE ALL CHANGES
@@ -119,5 +129,7 @@ function updatingCard(id, dispatch, obj) {
       description: obj.description
     })
   })
-    .then(() => fetchingAllCards(DEFAULT_URL, dispatch));
+    .then(() => {
+      fetchingAllCards(DEFAULT_URL, dispatch)
+    });
 }

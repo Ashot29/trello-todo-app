@@ -44,7 +44,7 @@ export const addCardsActionCreator = (data) => {
         payload: data
     }
 }
-
+ 
 export const addCard = (inputValue, locationListId) => {
     return dispatch => {
         let data = {

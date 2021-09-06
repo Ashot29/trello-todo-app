@@ -31,16 +31,22 @@
   ],
   "cards": [
     {
-      "title": "John Smith",
+      "title": "some card",
       "locatedAtList": 1,
-      "description": "",
+      "description": "asasasas",
       "id": 1
     },
     {
-      "title": "Moscow",
+      "title": "London",
       "locatedAtList": 1,
-      "description": "",
-      "id": 2
+      "description": "some description...",
+      "id": 4
+    },
+    {
+      "title": "John Smith",
+      "locatedAtList": 2,
+      "description": "description of John Smith",
+      "id": 5
     }
   ]
 }

@@ -3,5 +3,4 @@ export const initialState = {
     lists: [],
     cards: [],
     isLoading: false,
-    modalIsOpen: false,
 };

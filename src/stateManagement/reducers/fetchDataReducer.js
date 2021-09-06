@@ -1,5 +1,5 @@
 import { initialState } from "../store/initialState";
-
+ 
 export function fetchData(state = initialState, action) {
     switch (action.type) {
         case 'FETCH_USERS_REQUEST':
