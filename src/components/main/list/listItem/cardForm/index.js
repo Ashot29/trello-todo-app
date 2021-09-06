@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextField } from '@material-ui/core'
 import Button from "@material-ui/core/Button";
-import './cardForm.css'
+import './index.css'
 import { addCard } from '../../../../../stateManagement/actions/fetchDataActionCreator';
 import { useDispatch } from 'react-redux';
 

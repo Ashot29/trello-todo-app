@@ -6,10 +6,10 @@ import Fade from '@material-ui/core/Fade';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { closeModal } from '../../../stateManagement/actions/modalActionCreator';
-import './cardModal.css'
+import './index.css'
 import { DEFAULT_URL } from '../../../stateManagement/url';
-import { deleteCard } from '../list/listItem/card/card';
-import { fetchingAllCards } from '../list/list';
+import { deleteCard } from '../list/listItem/card';
+import { fetchingAllCards } from '../list';
 
 const useStyles = makeStyles((theme) => ({
   modal: {

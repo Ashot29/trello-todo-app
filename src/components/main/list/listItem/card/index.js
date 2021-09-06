@@ -5,11 +5,11 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { DEFAULT_URL } from './../../../../../stateManagement/url';
+import { DEFAULT_URL } from '../../../../../stateManagement/url';
 import { useDispatch } from 'react-redux';
-import { fetchingAllCards } from '../../list';
+import { fetchingAllCards } from '../..';
 import { openModal } from '../../../../../stateManagement/actions/modalActionCreator';
-import './card.css'
+import './index.css'
 
 const useStyles = makeStyles({
     root: {

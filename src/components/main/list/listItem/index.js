@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import MenuButton from './menuButton/menuButton';
-import './listItem.css'
+import MenuButton from './menuButton';
+import './index.css'
 import { useDispatch } from 'react-redux';
-import MediaCard from './card/card';
-import CardForm from './cardForm/cardForm';
+import MediaCard from './card';
+import CardForm from './cardForm';
 import Input from '@material-ui/core/Input';
 import { useSelector } from 'react-redux';
 import { DEFAULT_URL } from '../../../../stateManagement/url';
-import { fetchingAllLists } from '../list';
+import { fetchingAllLists } from '..';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import CardModal from '../../cardModal/cardModal';
+import CardModal from '../../cardModal';
 
 const ListItem = ({ title, id, innerRef, provided }) => {
     let [isClicked, setIsClicked] = useState(false);

@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeButtonState } from "../../stateManagement/actions/buttonActionCreator";
-import List from "./list/list";
-import ListForm from "./listForm/listForm";
+import List from "./list";
+import ListForm from "./listForm";
 import Button from "@material-ui/core/Button";
-import "./main.css";
+import "./index.css";
 
 function Main() {
   let state = useSelector(state => state.isButtonClicked)

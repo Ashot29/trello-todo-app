@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import ListItem from './listItem/listItem';
-import { DEFAULT_URL } from './../../../stateManagement/url';
+import ListItem from './listItem';
+import { DEFAULT_URL } from '../../../stateManagement/url';
 import { useDispatch } from 'react-redux';
 import { fetchAllUsers, getAllCards } from '../../../stateManagement/actions/fetchDataActionCreator';
 import { useSelector } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import './list.css'
+import './index.css'
 
 export const fetchingAllCards = (url, dispatch) => {
     fetch(`${url}/cards`)

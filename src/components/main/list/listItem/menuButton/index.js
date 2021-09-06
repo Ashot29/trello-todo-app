@@ -4,9 +4,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Fade from '@material-ui/core/Fade';
 import { DEFAULT_URL } from '../../../../../stateManagement/url';
-import { fetchingAllLists } from '../../list';
+import { fetchingAllLists } from '../..';
 import { useDispatch } from 'react-redux';
-import { fetchingAllCards } from './../../list';
+import { fetchingAllCards } from '../..';
 
 function deleteListWithItsCards(url, id, dispatch) {
   fetch(`${url}/lists/${id}`, {
