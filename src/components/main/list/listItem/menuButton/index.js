@@ -44,6 +44,11 @@ export default function MenuButton({ id }) {
     setAnchorEl(null);
   };
 
+  const deletingList = () => {
+    deleteListWithItsCards(DEFAULT_URL, id, dispatch);
+    handleClose();
+  };
+
   return (
     <>
       <Button
@@ -62,14 +67,11 @@ export default function MenuButton({ id }) {
         TransitionComponent={Fade}
       >
         <MenuItem
-          onClick={() => {
-            deleteListWithItsCards(DEFAULT_URL, id, dispatch);
-            handleClose();
-          }}
+          onClick={deletingList}
         >
           Delete This List
         </MenuItem>
-        <MenuItem onClick={() => handleClose()}>Move This List</MenuItem>
+        <MenuItem onClick={handleClose}>Move This List</MenuItem>
       </Menu>
     </>
   );

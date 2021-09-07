@@ -21,7 +21,7 @@ function Main() {
       <Button
         variant="outlined"
         style={{ backgroundColor: "#e0e0e0" }}
-        onClick={() => changeForm()}
+        onClick={changeForm}
       >
         + ADD A LIST
       </Button>

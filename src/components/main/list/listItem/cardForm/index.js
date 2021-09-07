@@ -20,12 +20,18 @@ function CardForm({ id }) {
     setIsClicked(!isClicked);
   }
 
+  function addingCard() {
+    dispatch(addCard(inputValue, id));
+    changeForm();
+    setInputValue("");
+  }
+
   if (!isClicked) {
     elem = (
       <Button
         variant="outlined"
         style={{ backgroundColor: "#e0e0e0" }}
-        onClick={() => changeForm()}
+        onClick={changeForm}
       >
         + ADD A CARD
       </Button>
@@ -34,11 +40,7 @@ function CardForm({ id }) {
     elem = (
       <form
         className="create-list"
-        onSubmit={() => {
-          dispatch(addCard(inputValue, id));
-          changeForm();
-          setInputValue("");
-        }}
+        onSubmit={addingCard}
       >
         <TextField
           id="standard-basic"
@@ -52,18 +54,14 @@ function CardForm({ id }) {
             variant="contained"
             style={buttonStyles}
             color="primary"
-            onClick={() => {
-              dispatch(addCard(inputValue, id));
-              changeForm();
-              setInputValue("");
-            }}
+            onClick={addingCard}
           >
             Add Card
           </Button>
           <Button
             style={buttonStyles}
             color="primary"
-            onClick={() => changeForm()}
+            onClick={changeForm}
           >
             X
           </Button>

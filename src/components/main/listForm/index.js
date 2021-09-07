@@ -19,13 +19,15 @@ function ListForm() {
     dispatch(changeButtonState());
   }
 
+  function addList() {
+    dispatch(fetchUsers(inputValue));
+    setInputValue("");
+  }
+
   return (
     <form
       className="create-list"
-      onSubmit={() => {
-        dispatch(fetchUsers(inputValue));
-        setInputValue("");
-      }}
+      onSubmit={addList}
     >
       <TextField
         id="outlined-basic"
@@ -39,17 +41,14 @@ function ListForm() {
           variant="contained"
           style={buttonStyles}
           color="primary"
-          onClick={() => {
-            dispatch(fetchUsers(inputValue));
-            setInputValue("");
-          }}
+          onClick={addList}
         >
           Add List
         </Button>
         <Button
           style={buttonStyles}
           color="primary"
-          onClick={() => changeForm()}
+          onClick={changeForm}
         >
           X
         </Button>

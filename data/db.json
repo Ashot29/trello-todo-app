@@ -31,22 +31,10 @@
   ],
   "cards": [
     {
-      "title": "Moscow",
-      "locatedAtList": 1,
-      "description": "some description...",
-      "id": 2
-    },
-    {
-      "title": "London",
-      "locatedAtList": 1,
-      "description": "",
-      "id": 6
-    },
-    {
       "title": "John Smith",
-      "locatedAtList": 1,
+      "locatedAtList": 2,
       "description": "",
-      "id": 7
+      "id": 1
     }
   ]
 }

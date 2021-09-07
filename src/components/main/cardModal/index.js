@@ -57,6 +57,15 @@ export default function CardModal() {
     handleClose();
   }
 
+  function saveAllChangesInModal() {
+    let data = {
+      title: titleValue,
+      description: desc,
+    };
+    patchingCards(data, id, fetchingAllCards);
+    dispatch(closeModal());
+  }
+
   return (
     <div>
       <Modal
@@ -84,7 +93,7 @@ export default function CardModal() {
                   value={titleValue}
                   onChange={(evt) => setTitleValue(evt.target.value)}
                 />
-                <Button onClick={() => handleClose()}>X</Button>
+                <Button onClick={handleClose}>X</Button>
               </div>
               <div className="card-description">
                 <TextField
@@ -101,14 +110,7 @@ export default function CardModal() {
                   variant="contained"
                   style={{ marginRight: "5px" }}
                   color="primary"
-                  onClick={() => {
-                    let data = {
-                      title: titleValue,
-                      description: desc,
-                    };
-                    patchingCards(data, id, fetchingAllCards);
-                    dispatch(closeModal());
-                  }}
+                  onClick={saveAllChangesInModal}
                 >
                   SAVE ALL CHANGES
                 </Button>
