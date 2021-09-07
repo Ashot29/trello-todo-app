@@ -19,6 +19,34 @@
       "email": "ann@codingthesmartway.com"
     }
   ],
-  "lists": [],
-  "cards": []
+  "lists": [
+    {
+      "title": "title",
+      "id": 1
+    },
+    {
+      "title": "title 2",
+      "id": 2
+    }
+  ],
+  "cards": [
+    {
+      "title": "Moscow",
+      "locatedAtList": 1,
+      "description": "some description...",
+      "id": 2
+    },
+    {
+      "title": "London",
+      "locatedAtList": 1,
+      "description": "",
+      "id": 6
+    },
+    {
+      "title": "John Smith",
+      "locatedAtList": 1,
+      "description": "",
+      "id": 7
+    }
+  ]
 }

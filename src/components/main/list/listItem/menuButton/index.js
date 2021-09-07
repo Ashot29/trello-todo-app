@@ -1,36 +1,34 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
-import { DEFAULT_URL } from '../../../../../stateManagement/url';
-import { fetchingAllLists } from '../..';
-import { useDispatch } from 'react-redux';
-import { fetchingAllCards } from '../..';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Fade from "@material-ui/core/Fade";
+import { DEFAULT_URL } from "../../../../../stateManagement/url";
+import { fetchingAllLists } from "../..";
+import { useDispatch } from "react-redux";
+import { fetchingAllCards } from "../..";
 
 function deleteListWithItsCards(url, id, dispatch) {
   fetch(`${url}/lists/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-  })
-    .then(() => {
-      fetch(`${url}/cards?locatedAtList=${id}`)
-        .then(resp => resp.json())
-        .then(data => {
-          fetchingAllLists(url, dispatch);
-          data.forEach(item => {
-            fetch(`${url}/cards/${item.id}`, {
-              method: "DELETE",
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            })
-            .then(() => fetchingAllCards(url, dispatch))
-          })
-        })
-    })
+  }).then(() => {
+    fetch(`${url}/cards?locatedAtList=${id}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        fetchingAllLists(url, dispatch);
+        data.forEach((item) => {
+          fetch(`${url}/cards/${item.id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(() => fetchingAllCards(url, dispatch));
+        });
+      });
+  });
 }
 
 export default function MenuButton({ id }) {
@@ -48,7 +46,11 @@ export default function MenuButton({ id }) {
 
   return (
     <>
-      <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
+      <Button
+        aria-controls="fade-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
         <b>...</b>
       </Button>
       <Menu
@@ -59,10 +61,12 @@ export default function MenuButton({ id }) {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={() => {
-          deleteListWithItsCards(DEFAULT_URL, id, dispatch)
-          handleClose();
-        }}>
+        <MenuItem
+          onClick={() => {
+            deleteListWithItsCards(DEFAULT_URL, id, dispatch);
+            handleClose();
+          }}
+        >
           Delete This List
         </MenuItem>
         <MenuItem onClick={() => handleClose()}>Move This List</MenuItem>

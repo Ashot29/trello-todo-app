@@ -7,27 +7,35 @@ import Button from "@material-ui/core/Button";
 import "./index.css";
 
 function Main() {
-  let state = useSelector(state => state.isButtonClicked)
+  let state = useSelector((state) => state.isButtonClicked);
   let dispatch = useDispatch();
 
   function changeForm() {
-    dispatch(changeButtonState())
+    dispatch(changeButtonState());
   }
 
   let element;
 
   if (!state.isButtonClicked) {
-    element = <Button variant="outlined" style={{ backgroundColor: "#e0e0e0" }} onClick={() => changeForm()}>+ ADD A LIST</Button>
+    element = (
+      <Button
+        variant="outlined"
+        style={{ backgroundColor: "#e0e0e0" }}
+        onClick={() => changeForm()}
+      >
+        + ADD A LIST
+      </Button>
+    );
   } else {
-    element = <ListForm />
+    element = <ListForm />;
   }
 
   return (
     <div className="main-content">
-        <div className="lists">
-          <List />
-          {element}
-        </div>
+      <div className="lists">
+        <List />
+        {element}
+      </div>
     </div>
   );
 }

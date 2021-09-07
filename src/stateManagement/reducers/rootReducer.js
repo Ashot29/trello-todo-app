@@ -4,7 +4,7 @@ import { modalReducer } from "./modalReducer";
 import { fetchData } from "./fetchDataReducer";
 
 export let rootReducer = combineReducers({
-    isButtonClicked,
-    fetchData,
-    modalReducer
-}) 
+  isButtonClicked,
+  fetchData,
+  modalReducer,
+});
