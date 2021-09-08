@@ -11,7 +11,7 @@ import { fetchingAllLists } from "..";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import CardModal from "../../cardModal";
 
-const ListItem = ({ title, id, innerRef, provided }) => {
+const ListItem = ({ title, id }) => {
   let [isClicked, setIsClicked] = useState(false);
   let [value, setValue] = useState(title);
   let localCards = useSelector((state) =>
@@ -25,14 +25,14 @@ const ListItem = ({ title, id, innerRef, provided }) => {
     cardRenderingLogic(cardsArray, localCards, updateCardsArray);
   }, [localCards]);
 
-  function handleOnDragEnd(result) {
-    if (!result.destination) return;
-    const items = Array.from(cardsArray);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    console.log(items);
-    updateCardsArray(items);
-  }
+  // function handleOnDragEnd(result) {
+  //   if (!result.destination) return;
+  //   const items = Array.from(cardsArray);
+  //   const [reorderedItem] = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, reorderedItem);
+  //   console.log(items);
+  //   updateCardsArray(items);
+  // }
 
   let element = !isClicked ? (
     <div
@@ -62,9 +62,6 @@ const ListItem = ({ title, id, innerRef, provided }) => {
   return (
     <div
       className="list-item"
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      ref={innerRef}
     >
       <div className="list-top">
         {element}
@@ -73,42 +70,23 @@ const ListItem = ({ title, id, innerRef, provided }) => {
         </div>
       </div>
       <div className="button-and-cards">
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="cards-container">
-            {(provided) => (
-              <div
-                className="cards-container"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {!!cardsArray.length &&
-                  cardsArray.map((card, index) => {
-                    return (
-                      <Draggable
-                        key={card.id}
-                        draggableId={`${card.id}`}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <>
-                            <MediaCard
-                              provided={provided}
-                              innerRef={provided.innerRef}
-                              id={card.id}
-                              title={card.title}
-                              description={card.description}
-                            />
-                            <CardModal />
-                          </>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        
+        <div className="cards-container">
+          {!!cardsArray.length &&
+            cardsArray.map((card, index) => {
+              return (
+                <>
+                  <MediaCard
+                    key={card.id}
+                    id={card.id}
+                    title={card.title}
+                    description={card.description}
+                  />
+                  <CardModal />
+                </>
+              );
+            })}
+        </div>
         <CardForm id={id} />
       </div>
     </div>

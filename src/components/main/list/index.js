@@ -44,61 +44,35 @@ function List() {
     fetchingAllCards(DEFAULT_URL, dispatch);
   }, []);
 
-  function handleOnDragEnd(result) {
-    // Can write logic, to PUT only changed lists, not all
-    if (!result.destination) return;
-    const items = JSON.parse(JSON.stringify(listsArray));
-    const clone = JSON.parse(JSON.stringify(listsArray));
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    items.forEach((item, index) => {
-      let position = clone[index].position;
-      if (item.position === position) return;
-      fetch(`${DEFAULT_URL}/lists/${item.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          position: position
-        }),
-      });
-    });
-    updateListsArray(items);
-  }
+  // function handleOnDragEnd(result) {
+  //   // Can write logic, to PUT only changed lists, not all
+  //   if (!result.destination) return;
+  //   const items = JSON.parse(JSON.stringify(listsArray));
+  //   const clone = JSON.parse(JSON.stringify(listsArray));
+  //   const [reorderedItem] = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, reorderedItem);
+  //   items.forEach((item, index) => {
+  //     let position = clone[index].position;
+  //     if (item.position === position) return;
+  //     fetch(`${DEFAULT_URL}/lists/${item.id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         position: position
+  //       }),
+  //     });
+  //   });
+  //   updateListsArray(items);
+  // }
 
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="list-content" direction="horizontal">
-        {(provided) => (
-          <div
-            className="list-content"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {listsArray.map((list, index) => {
-              return (
-                <Draggable
-                  key={list.id}
-                  draggableId={`${list.id}`}
-                  index={index}
-                >
-                  {(provided) => (
-                    <ListItem
-                      id={list.id}
-                      title={list.title}
-                      provided={provided}
-                      innerRef={provided.innerRef}
-                    />
-                  )}
-                </Draggable>
-              );
-            })}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className="list-content">
+      {listsArray.map((list, index) => {
+        return <ListItem key={list.id} id={list.id} title={list.title} />;
+      })}
+    </div>
   );
 }
 

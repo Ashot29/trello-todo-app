@@ -45,8 +45,6 @@ function handlingCardClick(event, id, url, dispatch, title, description) {
 export default function MediaCard({
   title,
   id,
-  provided,
-  innerRef,
   description,
 }) {
   let dispatch = useDispatch();
@@ -56,9 +54,6 @@ export default function MediaCard({
     <>
       <div
         className="card-wrapper"
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={innerRef}
       >
         <Card
           className={classes.root}

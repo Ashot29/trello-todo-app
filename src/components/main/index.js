@@ -4,6 +4,7 @@ import { changeButtonState } from "../../stateManagement/actions/buttonActionCre
 import List from "./list";
 import ListForm from "./listForm";
 import Button from "@material-ui/core/Button";
+import { DragDropContext } from "react-beautiful-dnd";
 import "./index.css";
 
 function Main() {
@@ -15,6 +16,7 @@ function Main() {
   }
 
   return (
+    <DragDropContext onDragEnd={console.log(1)}>
     <div className="main-content">
       <div className="lists">
         <List />
@@ -31,6 +33,7 @@ function Main() {
         )}
       </div>
     </div>
+    </DragDropContext>
   );
 }
 
