@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeButtonState } from "../../../stateManagement/actions/buttonActionCreator";
 import { TextField } from "@material-ui/core";
 import { fetchUsers } from "../../../stateManagement/actions/fetchDataActionCreator";
@@ -9,6 +9,7 @@ import "./index.css";
 function ListForm() {
   let dispatch = useDispatch();
   let [inputValue, setInputValue] = useState("");
+  let lists = useSelector((state) => state.fetchData.lists);
 
   let buttonStyles = {
     marginTop: "12px",
@@ -20,15 +21,19 @@ function ListForm() {
   }
 
   function addList() {
-    dispatch(fetchUsers(inputValue));
-    setInputValue("");
+    if (lists.length === 0) {
+      dispatch(fetchUsers(inputValue, 0));
+      setInputValue("");
+    } else {
+      let length = lists.length;
+      let pos = lists[length - 1].position + 1;
+      dispatch(fetchUsers(inputValue, pos));
+      setInputValue("");
+    }
   }
 
   return (
-    <form
-      className="create-list"
-      onSubmit={addList}
-    >
+    <form className="create-list" onSubmit={addList}>
       <TextField
         id="outlined-basic"
         label="Enter list title*"
@@ -45,11 +50,7 @@ function ListForm() {
         >
           Add List
         </Button>
-        <Button
-          style={buttonStyles}
-          color="primary"
-          onClick={changeForm}
-        >
+        <Button style={buttonStyles} color="primary" onClick={changeForm}>
           X
         </Button>
       </div>

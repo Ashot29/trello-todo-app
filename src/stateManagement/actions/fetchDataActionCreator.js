@@ -20,10 +20,11 @@ export const fetchAllUsers = (list) => {
   };
 };
 
-export const fetchUsers = (title) => {
+export const fetchUsers = (title, position) => {
   return (dispatch) => {
     let data = {
       title,
+      position,
     };
     dispatch(fetchUsersRequest());
     fetch(`${DEFAULT_URL}/lists`, {
@@ -49,7 +50,7 @@ export const addCard = (inputValue, locationListId) => {
   return (dispatch) => {
     let data = {
       title: inputValue,
-      locatedAtList: locationListId,
+      list_id: locationListId,
       description: "",
     };
     fetch(`${DEFAULT_URL}/cards`, {

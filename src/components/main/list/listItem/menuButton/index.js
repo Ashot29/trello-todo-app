@@ -15,7 +15,7 @@ function deleteListWithItsCards(url, id, dispatch) {
       "Content-Type": "application/json",
     },
   }).then(() => {
-    fetch(`${url}/cards?locatedAtList=${id}`)
+    fetch(`${url}/cards?list_id=${id}`)
       .then((resp) => resp.json())
       .then((data) => {
         fetchingAllLists(url, dispatch);
@@ -66,11 +66,7 @@ export default function MenuButton({ id }) {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem
-          onClick={deletingList}
-        >
-          Delete This List
-        </MenuItem>
+        <MenuItem onClick={deletingList}>Delete This List</MenuItem>
         <MenuItem onClick={handleClose}>Move This List</MenuItem>
       </Menu>
     </>

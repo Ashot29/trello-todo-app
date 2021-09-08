@@ -15,7 +15,7 @@ const ListItem = ({ title, id, innerRef, provided }) => {
   let [isClicked, setIsClicked] = useState(false);
   let [value, setValue] = useState(title);
   let localCards = useSelector((state) =>
-    state.fetchData.cards.filter((item) => item.locatedAtList === id)
+    state.fetchData.cards.filter((item) => item.list_id === id)
   );
   const [cardsArray, updateCardsArray] = useState(localCards);
   let dispatch = useDispatch();
@@ -30,6 +30,7 @@ const ListItem = ({ title, id, innerRef, provided }) => {
     const items = Array.from(cardsArray);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
+    console.log(items);
     updateCardsArray(items);
   }
 

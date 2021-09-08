@@ -6,7 +6,7 @@ import { rootReducer } from "../reducers/rootReducer";
 
 export let store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger, thunk))
+  composeWithDevTools(applyMiddleware(thunk))
 );
 console.log(store.getState());
 

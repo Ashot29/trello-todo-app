@@ -21,20 +21,44 @@
   ],
   "lists": [
     {
-      "title": "title",
+      "title": "title 1",
+      "position": 1,
       "id": 1
     },
     {
       "title": "title 2",
+      "position": 3,
       "id": 2
+    },
+    {
+      "title": "title 3",
+      "position": 0,
+      "id": 3
+    },
+    {
+      "title": "title 4",
+      "position": 2,
+      "id": 4
     }
   ],
   "cards": [
     {
-      "title": "John Smith",
-      "locatedAtList": 2,
+      "title": "Moscow",
+      "list_id": 4,
       "description": "",
       "id": 1
+    },
+    {
+      "title": "Tokyo",
+      "list_id": 1,
+      "description": "",
+      "id": 2
+    },
+    {
+      "title": "London",
+      "list_id": 1,
+      "description": "",
+      "id": 3
     }
   ]
 }

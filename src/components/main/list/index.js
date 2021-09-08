@@ -9,8 +9,6 @@ import {
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./index.css";
 
-// change into this one function
-
 export const fetchingAllCards = (url, dispatch) => {
   fetch(`${url}/cards`)
     .then((resp) => resp.json())
@@ -23,6 +21,8 @@ export const fetchingAllLists = (url, dispatch) => {
   fetch(`${url}/lists`)
     .then((resp) => resp.json())
     .then((data) => {
+      data.sort((a, b) => a.position - b.position);
+      console.log(data, "first fetched data sorted");
       dispatch(fetchAllUsers(data));
     });
 };
@@ -45,13 +45,26 @@ function List() {
   }, []);
 
   function handleOnDragEnd(result) {
+    // Can write logic, to PUT only changed lists, not all
     if (!result.destination) return;
-    const items = Array.from(listsArray);
+    const items = JSON.parse(JSON.stringify(listsArray));
+    const clone = JSON.parse(JSON.stringify(listsArray));
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
+    items.forEach((item, index) => {
+      let position = clone[index].position;
+      if (item.position === position) return;
+      fetch(`${DEFAULT_URL}/lists/${item.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          position: position
+        }),
+      });
+    });
     updateListsArray(items);
-
-    // this can be used in changing list position
   }
 
   return (

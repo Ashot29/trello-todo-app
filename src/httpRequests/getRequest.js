@@ -1,6 +1,6 @@
 import { DEFAULT_URL } from "../stateManagement/url";
 
-export const fetchingAllData = (dispatch, url = DEFAULT_URL) => {
+export const getRequest = (dispatch, url = DEFAULT_URL) => {
   return function (prefix, getData) {
     fetch(`${url}/${prefix}`)
       .then((resp) => resp.json())
