@@ -14,16 +14,11 @@ import CardModal from "../../cardModal";
 const ListItem = ({ title, id }) => {
   let [isClicked, setIsClicked] = useState(false);
   let [value, setValue] = useState(title);
-  let localCards = useSelector((state) =>
-    state.fetchData.cards.filter((item) => item.list_id === id)
+  let cards = useSelector((state) =>
+    state.fetchData.cards.filter((item) => item.list_id == id)
   );
-  const [cardsArray, updateCardsArray] = useState(localCards);
   let dispatch = useDispatch();
   let patchingNewListName = patchRequest(dispatch, "lists");
-
-  useEffect(() => {
-    cardRenderingLogic(cardsArray, localCards, updateCardsArray);
-  }, [localCards]);
 
   // function handleOnDragEnd(result) {
   //   if (!result.destination) return;
@@ -60,9 +55,7 @@ const ListItem = ({ title, id }) => {
   );
 
   return (
-    <div
-      className="list-item"
-    >
+    <div className="list-item">
       <div className="list-top">
         {element}
         <div>
@@ -70,24 +63,34 @@ const ListItem = ({ title, id }) => {
         </div>
       </div>
       <div className="button-and-cards">
-        
-        <div className="cards-container">
-          {!!cardsArray.length &&
-            cardsArray.map((card, index) => {
-              return (
-                <>
-                  <MediaCard
-                    key={card.id}
-                    id={card.id}
-                    title={card.title}
-                    description={card.description}
-                  />
-                  <CardModal />
-                </>
-              );
-            })}
-        </div>
+        <Droppable droppableId={`${id}`} type="CARDS">
+          {(provided) => (
+            <div 
+            className="cards-container"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            >
+              {!!cards.length &&
+                cards.map((card, index) => {
+                  return (
+                    <div className="card-wrapper" key={card.id}>
+                      <MediaCard
+                        key={card.id}
+                        id={card.id}
+                        list_id={card.list_id}
+                        title={card.title}
+                        description={card.description}
+                        index={index}
+                      />
+                    </div>
+                  );
+                })}
+                {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
         <CardForm id={id} />
+        <CardModal />
       </div>
     </div>
   );
@@ -128,7 +131,8 @@ function cardRenderingLogic(cardsArray, localCards, updateCardsArray) {
     for (let i = 0; i < arr1.length; i++) {
       if (
         arr1[i].title !== arr2[i].title ||
-        arr1[i].description !== arr2[i].description
+        arr1[i].description !== arr2[i].description ||
+        arr1[i].list_id !== arr2[i].list_id
       ) {
         updateCardsArray(arr2);
       }

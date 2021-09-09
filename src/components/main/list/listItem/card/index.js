@@ -9,6 +9,7 @@ import { DEFAULT_URL } from "../../../../../stateManagement/url";
 import { useDispatch } from "react-redux";
 import { fetchingAllCards } from "../..";
 import { openModal } from "../../../../../stateManagement/actions/modalActionCreator";
+import { Draggable } from "react-beautiful-dnd";
 import "./index.css";
 
 const useStyles = makeStyles({
@@ -20,72 +21,91 @@ const useStyles = makeStyles({
   },
 });
 
-export const deleteCard = (url, id, dispatch) => {
+export const deleteCard = (url, id, dispatch, list_id) => {
   fetch(`${url}/cards/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(() => {
+  })
+  .then(() => {
+    fetch(`${DEFAULT_URL}/lists/${list_id}`)
+    .then(resp => resp.json())
+    .then(dataOfList => {
+      let arr = [...dataOfList.card_positions]
+      let index = arr.findIndex(item => item == id)
+      arr.splice(index, 1)
+      console.log(arr, 'arr')
+      fetch(`${DEFAULT_URL}/lists/${list_id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        card_positions: [...arr]
+      })
+    })
+    })
     fetchingAllCards(url, dispatch);
   });
 };
 
-function handlingCardClick(event, id, url, dispatch, title, description) {
+function handlingCardClick(event, id, url, dispatch, title, description, list_id) {
   if (
     !event.target.closest("button") ||
     !event.target.closest("button").classList.contains("MuiIconButton-root")
   ) {
-    dispatch(openModal(title, id, description));
+    dispatch(openModal(title, id, description, list_id));
   } else {
-    deleteCard(url, id, dispatch);
+    deleteCard(url, id, dispatch, list_id);
   }
 }
 
-export default function MediaCard({
-  title,
-  id,
-  description,
-}) {
+export default function MediaCard({ title, id, description, index, list_id }) {
   let dispatch = useDispatch();
   const classes = useStyles();
 
   return (
-    <>
-      <div
-        className="card-wrapper"
-      >
-        <Card
-          className={classes.root}
-          style={{ marginTop: "15px", marginBottom: "15px" }}
-          onClick={(event) =>
-            handlingCardClick(
-              event,
-              id,
-              DEFAULT_URL,
-              dispatch,
-              title,
-              description
-            )
-          }
+    <Draggable draggableId={`${id}`} index={index}>
+      {(provided) => (
+        <div 
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
         >
-          <CardContent
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              cursor: "pointer",
-            }}
+          <Card
+            className={classes.root}
+            style={{ marginTop: "15px", marginBottom: "15px" }}
+            onClick={(event) =>
+              handlingCardClick(
+                event,
+                id,
+                DEFAULT_URL,
+                dispatch,
+                title,
+                description,
+                list_id
+              )
+            }
           >
-            <Typography gutterBottom variant="h5" component="h2">
-              {(title.length <= 13 && title) || title.slice(0, 13) + "..."}
-            </Typography>
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </CardContent>
-        </Card>
-      </div>
-    </>
+            <CardContent
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+              }}
+            >
+              <Typography gutterBottom variant="h5" component="h2">
+                {(title.length <= 13 && title) || title.slice(0, 13) + "..."}
+              </Typography>
+              <IconButton aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+    </Draggable>
   );
 }

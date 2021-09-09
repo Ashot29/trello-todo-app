@@ -21,15 +21,8 @@ function ListForm() {
   }
 
   function addList() {
-    if (lists.length === 0) {
-      dispatch(fetchUsers(inputValue, 0));
-      setInputValue("");
-    } else {
-      let length = lists.length;
-      let pos = lists[length - 1].position + 1;
-      dispatch(fetchUsers(inputValue, pos));
-      setInputValue("");
-    }
+    dispatch(fetchUsers(inputValue));
+    setInputValue("");
   }
 
   return (

@@ -16,7 +16,7 @@ function Main() {
   }
 
   return (
-    <DragDropContext onDragEnd={console.log(1)}>
+    
     <div className="main-content">
       <div className="lists">
         <List />
@@ -33,7 +33,6 @@ function Main() {
         )}
       </div>
     </div>
-    </DragDropContext>
   );
 }
 

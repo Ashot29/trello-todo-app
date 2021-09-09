@@ -21,58 +21,81 @@ export const fetchingAllLists = (url, dispatch) => {
   fetch(`${url}/lists`)
     .then((resp) => resp.json())
     .then((data) => {
-      data.sort((a, b) => a.position - b.position);
-      console.log(data, "first fetched data sorted");
       dispatch(fetchAllUsers(data));
     });
 };
 
 function List() {
   let lists = useSelector((state) => state.fetchData.lists);
-  const [listsArray, updateListsArray] = useState(lists);
+  let cards = useSelector((state) => state.fetchData.cards);
+  let [queue, setQueue] = useState([]);
+  let [listsArray, setListsArray] = useState(lists);
   let dispatch = useDispatch();
 
   useEffect(() => {
-    updateListsArray(lists);
+    setListsArray(lists);
   }, [lists]);
+
+  // useEffect(() => {
+  //   console.log(1)
+  // }, [cards])
 
   useEffect(() => {
     fetchingAllLists(DEFAULT_URL, dispatch);
+    fetchingAllCards(DEFAULT_URL, dispatch);
+    fetch(`${DEFAULT_URL}/list_positions`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setQueue([...data]);
+      })
   }, []);
 
   useEffect(() => {
-    fetchingAllCards(DEFAULT_URL, dispatch);
-  }, []);
+    fetch(`${DEFAULT_URL}/lists`)
+    .then(resp => resp.json())
+    .then(data => {
+      let arr = [];
+      queue.forEach(item => {
+        arr.push(data.find(dat => dat.id === item))
+      })
+      setListsArray(JSON.parse(JSON.stringify(arr)))
+    })
+  }, [queue])
 
-  // function handleOnDragEnd(result) {
-  //   // Can write logic, to PUT only changed lists, not all
-  //   if (!result.destination) return;
-  //   const items = JSON.parse(JSON.stringify(listsArray));
-  //   const clone = JSON.parse(JSON.stringify(listsArray));
-  //   const [reorderedItem] = items.splice(result.source.index, 1);
-  //   items.splice(result.destination.index, 0, reorderedItem);
-  //   items.forEach((item, index) => {
-  //     let position = clone[index].position;
-  //     if (item.position === position) return;
-  //     fetch(`${DEFAULT_URL}/lists/${item.id}`, {
-  //       method: "PATCH",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         position: position
-  //       }),
-  //     });
-  //   });
-  //   updateListsArray(items);
-  // }
+  const handleDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    fetch(`${DEFAULT_URL}/cards/${draggableId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ list_id: +destination.droppableId }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        // fetchingAllCards(DEFAULT_URL, dispatch)
+      });
+
+    console.log(result);
+  };
 
   return (
-    <div className="list-content">
-      {listsArray.map((list, index) => {
-        return <ListItem key={list.id} id={list.id} title={list.title} />;
-      })}
-    </div>
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <div className="list-content">
+        {listsArray.map((list, index) => {
+          return <ListItem key={list.id} id={list.id} title={list.title} />;
+        })}
+      </div>
+    </DragDropContext>
   );
 }
 

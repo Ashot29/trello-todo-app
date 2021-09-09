@@ -20,11 +20,11 @@ export const fetchAllUsers = (list) => {
   };
 };
 
-export const fetchUsers = (title, position) => {
+export const fetchUsers = (title) => {
   return (dispatch) => {
     let data = {
       title,
-      position,
+      card_positions: []
     };
     dispatch(fetchUsersRequest());
     fetch(`${DEFAULT_URL}/lists`, {
@@ -62,6 +62,18 @@ export const addCard = (inputValue, locationListId) => {
     })
       .then((resp) => resp.json())
       .then((data) => {
+        console.log(data, 'data');
+        fetch(`${DEFAULT_URL}/lists/${data.list_id}`)
+        .then(resp => resp.json())
+        .then(dataOfList => {
+          fetch(`${DEFAULT_URL}/lists/${data.list_id}`, {
+          method: 'PATCH',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({card_positions: [...dataOfList.card_positions, data.id]})
+        })
+        })
         dispatch(addCardsActionCreator(data));
       });
   };

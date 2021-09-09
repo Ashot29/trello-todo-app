@@ -13,6 +13,7 @@ export const modalReducer = (state = modalState, action) => {
         modalTitle: "",
         modalId: "",
         modalDescription: "",
+        modalListId: ''
       };
     case "OPEN_MODAL":
       return {
@@ -20,6 +21,7 @@ export const modalReducer = (state = modalState, action) => {
         modalTitle: action.payload.title,
         modalId: action.payload.id,
         modalDescription: action.payload.description,
+        modalListId: action.payload.list_id
       };
     default:
       return state;

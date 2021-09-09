@@ -22,6 +22,7 @@ function CardForm({ id }) {
 
   function addingCard() {
     dispatch(addCard(inputValue, id));
+    // fetch()
     changeForm();
     setInputValue("");
   }

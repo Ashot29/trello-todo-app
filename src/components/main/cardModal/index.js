@@ -32,6 +32,7 @@ export default function CardModal() {
     modalTitle: title,
     modalId: id,
     modalDescription: description,
+    modalListId: list_id
   } = state;
   const classes = useStyles();
   let [desc, setDesc] = useState(description);
@@ -53,7 +54,7 @@ export default function CardModal() {
   }, [title]);
 
   function deletingCardFromModal() {
-    deleteCard(DEFAULT_URL, id, dispatch);
+    deleteCard(DEFAULT_URL, id, dispatch, list_id);
     handleClose();
   }
 

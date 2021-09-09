@@ -14,6 +14,7 @@
 }
 
 .cards-container {
+  min-height: 20px;
   max-height: 530px;
   overflow-y: auto;
   padding-right: 5px;

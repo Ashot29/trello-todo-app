@@ -21,33 +21,41 @@
   ],
   "lists": [
     {
-      "title": "title",
-      "position": 0,
-      "id": 1
+      "title": "title 1",
+      "id": 1,
+      "card_positions": []
     },
     {
       "title": "title 2",
-      "position": 1,
-      "id": 2
+      "id": 2,
+      "card_positions": [
+        1,
+        3
+      ]
     },
     {
       "title": "title 3",
-      "position": 2,
-      "id": 3
+      "id": 3,
+      "card_positions": []
     }
   ],
   "cards": [
     {
       "title": "John Smith",
-      "list_id": 1,
+      "list_id": 2,
       "description": "",
       "id": 1
     },
     {
       "title": "Moscow",
-      "list_id": 1,
+      "list_id": 2,
       "description": "",
-      "id": 2
+      "id": 3
     }
+  ],
+  "list_positions": [
+    1,
+    2,
+    3
   ]
 }

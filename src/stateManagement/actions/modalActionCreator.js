@@ -4,13 +4,14 @@ export const closeModal = () => {
   };
 };
 
-export const openModal = (title, id, description) => {
+export const openModal = (title, id, description, list_id) => {
   return {
     type: "OPEN_MODAL",
     payload: {
       title,
       id,
       description,
+      list_id
     },
   };
 };
